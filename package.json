@@ -1,0 +1,29 @@
+{
+  "name": "img-minify-tool",
+  "version": "1.0.0",
+  "description": "一行命令即可实现所有图片无损压缩， 大大提高工作效率",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "imagemin": "^7.0.1",
+    "imagemin-gifsicle": "^7.0.0",
+    "imagemin-jpegtran": "^6.0.0",
+    "imagemin-pngquant": "^8.0.0",
+    "imagemin-svgo": "^7.1.0"
+  },
+  "scripts": {},
+  "keywords": [
+    "img",
+    "minify",
+    "svg",
+    "png",
+    "jpeg",
+    "jpg",
+    "gif",
+    "无损压缩",
+    "image"
+  ],
+  "author": "fanchong",
+  "license": "ISC",
+  "homepage": "https://github.com/fanchong02/img-minify-tool#readme"
+}
