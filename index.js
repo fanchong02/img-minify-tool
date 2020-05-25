@@ -1,9 +1,8 @@
 const path = require('path');
 const fs = require('fs');
 const imagemin = require('imagemin');
-const imageminJpegtran = require('imagemin-jpegtran');
+const imageminMozjpeg = require('imagemin-mozjpeg');
 const imageminPngquant = require('imagemin-pngquant');
-const imageminSvgo = require('imagemin-svgo');
 const imageminGifsicle = require('imagemin-gifsicle');
 
 const argv = process.argv.filter(item => /^catalogPath\=/.test(item))[0];
@@ -14,7 +13,7 @@ if (!argv) {
 }
 //获取执行任务的路径
 const catalogPath = argv.split('=')[1];
-console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>开始执行图片无损压缩任务>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n\n');
+console.log('------------------------ 开始执行图片无损压缩任务 ------------------------\n\n');
 console.log(`-> 本次无损压缩任务目录为：${catalogPath}\n`);
 //图片无损压缩函数
 (async () => {
@@ -29,7 +28,7 @@ console.log(`-> 本次无损压缩任务目录为：${catalogPath}\n`);
   //遍历某个文件夹下所有的XX文件
   async function findImageAndLetItSmall({
     catalogPath,
-    EXT_NAME = /^\.(jpg|jpeg|png|gif|svg|webp)$/i
+    EXT_NAME = /^\.(jpg|jpeg|png|gif|webp)$/i
   }) {
     const pathList = fs.readdirSync(catalogPath);
     for (let i = 0; i < pathList.length; i++) {
@@ -52,12 +51,15 @@ console.log(`-> 本次无损压缩任务目录为：${catalogPath}\n`);
           await imagemin([childCatalogOrFilePath], {
             destination: catalogPath,
             plugins: [
-              imageminJpegtran(),
+              imageminMozjpeg({
+                quality: 70, //质量过低， 会影响图片的视觉质量
+              }),
               imageminPngquant({
                 quality: [0.6, 0.7]
               }),
-              imageminSvgo(),
-              imageminGifsicle()
+              imageminGifsicle({
+                quality: 70
+              })
             ]
           });
           const afterSize = fs.statSync(childCatalogOrFilePath).size;
@@ -82,5 +84,5 @@ console.log(`-> 本次无损压缩任务目录为：${catalogPath}\n`);
   console.log(`-> 压缩前总体积${byteToKb(beforeSizeCount)}`);
   console.log(`-> 压缩后总体积${byteToKb(afterSizeCount)}`);
   console.log(`-> 节约体积${(saveCount * 100 / beforeSizeCount).toFixed(2)}%（共${byteToKb(saveCount)}）\n\n`);
-  console.log('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<图片无损压缩任务执行完毕<<<<<<<<<<<<<<<<<<<<<<<<<<<<<');
+  console.log('------------------------ 图片无损压缩任务执行完毕 ------------------------');
 })();
