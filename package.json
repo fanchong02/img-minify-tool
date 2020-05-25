@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "一行命令即可实现所有图片无损压缩， 大大提高工作效率",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fanchong02/img-minify-tool.git"
+  },
   "dependencies": {},
   "devDependencies": {
     "imagemin": "^7.0.1",
@@ -25,9 +29,5 @@
   ],
   "author": "fanchong",
   "license": "ISC",
-  "homepage": "https://github.com/fanchong02/img-minify-tool#readme",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/fanchong02/img-minify-tool.git"
-  }
+  "homepage": "https://github.com/fanchong02/img-minify-tool#readme"
 }
