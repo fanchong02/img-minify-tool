@@ -28,7 +28,7 @@ console.log(`-> 本次无损压缩任务目录为：${catalogPath}\n`);
   //遍历某个文件夹下所有的XX文件
   async function findImageAndLetItSmall({
     catalogPath,
-    EXT_NAME = /^\.(jpg|jpeg|png|gif|webp)$/i
+    EXT_NAME = /^\.(jpg|jpeg|png|gif)$/i
   }) {
     const pathList = fs.readdirSync(catalogPath);
     for (let i = 0; i < pathList.length; i++) {
