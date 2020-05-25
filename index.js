@@ -9,13 +9,13 @@ const imageminGifsicle = require('imagemin-gifsicle');
 const argv = process.argv.filter(item => /^catalogPath\=/.test(item))[0];
 //如果未传入指定参数，提示， 并终止任务
 if (!argv) {
-  console.log('请检查是否注入了catalogPath参数（示例：node index.js catalogPath=/Users/xxx/xxx/项目目录）');
+  console.log('-> 请检查是否注入了catalogPath参数（示例：node index.js catalogPath=/Users/xxx/xxx/项目目录）');
   return;
 }
 //获取执行任务的路径
 const catalogPath = argv.split('=')[1];
 console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>开始执行图片无损压缩任务>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n\n');
-console.log(`本次无损压缩任务目录为：${catalogPath}\n`);
+console.log(`-> 本次无损压缩任务目录为：${catalogPath}\n`);
 //图片无损压缩函数
 (async () => {
   //存放压缩前的图片体积
@@ -48,7 +48,7 @@ console.log(`本次无损压缩任务目录为：${catalogPath}\n`);
           const beforeSize = fs.statSync(childCatalogOrFilePath).size;
           //统计压缩前size
           beforeSizeList = [...beforeSizeList, beforeSize];
-          console.log(`${childCatalogOrFilePath} => 正在无损压缩(压缩前体积：${byteToKb(beforeSize)})`);
+          console.log(`${childCatalogOrFilePath} -> 正在无损压缩(压缩前体积：${byteToKb(beforeSize)})`);
           await imagemin([childCatalogOrFilePath], {
             destination: catalogPath,
             plugins: [
@@ -63,7 +63,7 @@ console.log(`本次无损压缩任务目录为：${catalogPath}\n`);
           const afterSize = fs.statSync(childCatalogOrFilePath).size;
 
           afterSizeList = [...afterSizeList, afterSize];
-          console.log(`${childCatalogOrFilePath} => 压缩完成（压缩后体积：${byteToKb(afterSize)}）\n`);
+          console.log(`${childCatalogOrFilePath} -> 压缩完成（压缩后体积：${byteToKb(afterSize)}）\n`);
         }
       }
     }
@@ -79,8 +79,8 @@ console.log(`本次无损压缩任务目录为：${catalogPath}\n`);
   //压缩掉的体积
   const saveCount = beforeSizeCount - afterSizeCount;
 
-  console.log(`===========> 压缩前总体积${byteToKb(beforeSizeCount)}`);
-  console.log(`===========> 压缩后总体积${byteToKb(afterSizeCount)}`);
-  console.log(`===========> 节约体积${(saveCount * 100 / beforeSizeCount).toFixed(2)}%（共${byteToKb(saveCount)}）\n\n`);
+  console.log(`-> 压缩前总体积${byteToKb(beforeSizeCount)}`);
+  console.log(`-> 压缩后总体积${byteToKb(afterSizeCount)}`);
+  console.log(`-> 节约体积${(saveCount * 100 / beforeSizeCount).toFixed(2)}%（共${byteToKb(saveCount)}）\n\n`);
   console.log('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<图片无损压缩任务执行完毕<<<<<<<<<<<<<<<<<<<<<<<<<<<<<');
 })();
