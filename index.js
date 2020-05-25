@@ -52,13 +52,13 @@ console.log(`-> 本次无损压缩任务目录为：${catalogPath}\n`);
             destination: catalogPath,
             plugins: [
               imageminMozjpeg({
-                quality: 70, //质量过低， 会影响图片的视觉质量
+                quality: 80, //质量过低， 会影响图片的视觉质量
               }),
               imageminPngquant({
                 quality: [0.6, 0.7]
               }),
               imageminGifsicle({
-                quality: 70
+                quality: 80
               })
             ]
           });
