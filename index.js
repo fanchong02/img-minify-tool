@@ -81,6 +81,7 @@ console.log(`-> 本次无损压缩任务目录为：${catalogPath}\n`);
   //压缩掉的体积
   const saveCount = beforeSizeCount - afterSizeCount;
 
+  console.log(`-> 共压缩图片${beforeSizeList.length}张`);
   console.log(`-> 压缩前总体积${byteToKb(beforeSizeCount)}`);
   console.log(`-> 压缩后总体积${byteToKb(afterSizeCount)}`);
   console.log(`-> 节约体积${(saveCount * 100 / beforeSizeCount).toFixed(2)}%（共${byteToKb(saveCount)}）\n\n`);
