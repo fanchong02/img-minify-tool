@@ -76,7 +76,7 @@ console.log(`-> 本次无损压缩任务目录为：${catalogPath}\n`);
   });
   if (!beforeSizeList.length) {
     console.log(`-> 任务目录下未检测到gif、png、jpg、jpeg等图片！\n`);
-    console.log('------------------------ 任务正常终止, 再见~ ------------------------');
+    console.log('------------------------ 任务正常终止, 下次见~ ------------------------');
     return;
   }
   //压缩前总体积
