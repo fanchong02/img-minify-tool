@@ -5,14 +5,8 @@ const imageminMozjpeg = require('imagemin-mozjpeg');
 const imageminPngquant = require('imagemin-pngquant');
 const imageminGifsicle = require('imagemin-gifsicle');
 
-const argv = process.argv.filter(item => /^catalogPath\=/.test(item))[0];
-//如果未传入指定参数，提示， 并终止任务
-if (!argv) {
-  console.log('-> 请检查是否注入了catalogPath参数（示例：node index.js catalogPath=/Users/xxx/xxx/项目目录）');
-  return;
-}
 //获取执行任务的路径
-const catalogPath = argv.split('=')[1];
+const catalogPath = process.argv[2];
 console.log('------------------------ 开始执行图片无损压缩任务 ------------------------\n\n');
 console.log(`-> 本次无损压缩任务目录为：${catalogPath}\n`);
 //图片无损压缩函数
