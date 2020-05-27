@@ -74,6 +74,11 @@ console.log(`-> 本次无损压缩任务目录为：${catalogPath}\n`);
   await findImageAndLetItSmall({
     catalogPath
   });
+  if (!beforeSizeList.length) {
+    console.log(`-> 任务目录下未检测到gif、png、jpg、jpeg等图片！`);
+    console.log(`-> 任务终止~ 再见`);
+    return;
+  }
   //压缩前总体积
   const beforeSizeCount = beforeSizeList.reduce((cur, sum) => cur + sum);
   //压缩后总体积
