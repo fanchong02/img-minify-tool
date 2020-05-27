@@ -27,7 +27,7 @@ if [ ! -d ~/fe_dev_tools/img_minify ]; then
   mkdir ~/fe_dev_tools/img_minify;
   echo "-> DOWLOADING: 脚本根目录创建成功";
   #克隆工具包代码到本地
-  git clone https://github.com/fanchong02/img-minify-tool.git ~/fe_dev_tools/img_minify;
+  git clone --depth=1 https://github.com/fanchong02/img-minify-tool.git ~/fe_dev_tools/img_minify;
   echo "-> DOWLOADING: 脚本下载完成";
   #安装工具包依赖
   echo "-> DOWLOADING: 脚本依赖安装";
@@ -41,4 +41,4 @@ else
   echo '-> UPDATE: 更新完毕\n';
 fi
 #node 执行无损压缩任务
-node index catalogPath="${targetPath}";
+node index.js ${targetPath};
