@@ -4,11 +4,12 @@ const imagemin = require('imagemin');
 const imageminMozjpeg = require('imagemin-mozjpeg');
 const imageminPngquant = require('imagemin-pngquant');
 const imageminGifsicle = require('imagemin-gifsicle');
+const params = require('minimist')(process.argv.slice(2));
 
 //获取执行任务的路径
-const catalogPath = process.argv[2];
+const { bundlePath } = params;
 console.log('------------------------ 开始执行图片无损压缩任务 ------------------------\n\n');
-console.log(`-> 本次无损压缩任务目录为：${catalogPath}\n`);
+console.log(`-> 本次无损压缩任务目录为：${bundlePath}\n`);
 //图片无损压缩函数
 (async () => {
   //存放压缩前的图片体积
@@ -21,18 +22,18 @@ console.log(`-> 本次无损压缩任务目录为：${catalogPath}\n`);
   }
   //遍历某个文件夹下所有的XX文件
   async function findImageAndLetItSmall({
-    catalogPath,
+    bundlePath,
     EXT_NAME = /^\.(jpg|jpeg|png|gif)$/i
   }) {
-    const pathList = fs.readdirSync(catalogPath);
+    const pathList = fs.readdirSync(bundlePath);
     for (let i = 0; i < pathList.length; i++) {
       //生成子文件、子目录的路径， 等待二次遍历确认
-      const childCatalogOrFilePath = path.join(catalogPath, pathList[i]);
+      const childCatalogOrFilePath = path.join(bundlePath, pathList[i]);
       //根据文件路径获取文件信息，返回一个fs.Stats对象
       const statInfo = fs.statSync(childCatalogOrFilePath);
       if (statInfo.isDirectory()) {
         await findImageAndLetItSmall({
-          catalogPath: childCatalogOrFilePath,
+          bundlePath: childCatalogOrFilePath,
           EXT_NAME
         });
       } else {
@@ -43,7 +44,7 @@ console.log(`-> 本次无损压缩任务目录为：${catalogPath}\n`);
           beforeSizeList = [...beforeSizeList, beforeSize];
           console.log(`${childCatalogOrFilePath} -> 正在无损压缩(压缩前体积：${byteToKb(beforeSize)})`);
           await imagemin([childCatalogOrFilePath], {
-            destination: catalogPath,
+            destination: bundlePath,
             plugins: [
               imageminMozjpeg({
                 quality: 80, //质量过低， 会影响图片的视觉质量
@@ -66,7 +67,7 @@ console.log(`-> 本次无损压缩任务目录为：${catalogPath}\n`);
   }
 
   await findImageAndLetItSmall({
-    catalogPath
+    bundlePath
   });
   if (!beforeSizeList.length) {
     console.log(`-> 任务目录下未检测到gif、png、jpg、jpeg等图片！\n`);

@@ -41,4 +41,4 @@ else
   echo '-> UPDATE: 更新完毕\n';
 fi
 #node 执行无损压缩任务
-node index.js ${targetPath};
+node index.js --bundlePath=${bundlePath};

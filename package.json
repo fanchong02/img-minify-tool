@@ -12,7 +12,8 @@
     "imagemin": "^7.0.1",
     "imagemin-gifsicle": "^7.0.0",
     "imagemin-mozjpeg": "^8.0.0",
-    "imagemin-pngquant": "^8.0.0"
+    "imagemin-pngquant": "^8.0.0",
+    "minimist": "^1.2.5"
   },
   "scripts": {},
   "keywords": [
