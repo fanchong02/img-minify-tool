@@ -14,7 +14,7 @@ else
   echo '----------------------------';
   echo '-> SUCCESS: 任务目录有效（ √ ）';
   echo '----------------------------';
-fi
+fi;
 echo '-> 无损压缩工具状态检测';
 #检测压缩工具包是否存在
 if [ ! -d ~/fe_dev_tools/img_minify ]; then
@@ -22,7 +22,7 @@ if [ ! -d ~/fe_dev_tools/img_minify ]; then
   #如果没有fe_dev_tools目录， 则先创建这个目录
   if [ ! -d ~/fe_dev_tools ]; then
     mkdir ~/fe_dev_tools;
-  fi
+  fi;
   #创建图片压缩工具包目录
   mkdir ~/fe_dev_tools/img_minify;
   echo "-> DOWLOADING: 脚本根目录创建成功";
@@ -39,6 +39,6 @@ else
   cd ~/fe_dev_tools/img_minify;
   git pull && yarn install;
   echo '-> UPDATE: 更新完毕\n';
-fi
+fi;
 #node 执行无损压缩任务
 node index.js --bundlePath=${bundlePath};
