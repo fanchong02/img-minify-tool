@@ -7,14 +7,14 @@
     "type": "git",
     "url": "https://github.com/fanchong02/img-minify-tool.git"
   },
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "imagemin": "^7.0.1",
     "imagemin-gifsicle": "^7.0.0",
     "imagemin-mozjpeg": "^8.0.0",
     "imagemin-pngquant": "^8.0.0",
     "minimist": "^1.2.5"
   },
+  "devDependencies": {},
   "scripts": {
     "minify": "sh minify.sh"
   },
