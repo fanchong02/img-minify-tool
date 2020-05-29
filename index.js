@@ -48,7 +48,7 @@ console.log(`-> 本次无损压缩任务目录为：${bundlePath}\n`);
             plugins: [
               imageminMozjpeg({
                 quality: 60, //质量过低， 会影响图片的视觉质量
-                smooth: 80
+                smooth: 90
               }),
               imageminPngquant({
                 quality: [0.6, 0.7],
