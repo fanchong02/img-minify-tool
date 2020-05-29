@@ -29,5 +29,7 @@
   ],
   "author": "fanchong",
   "license": "ISC",
-  "homepage": "https://github.com/fanchong02/img-minify-tool#readme"
+  "engines": {
+    "node": ">=7.0.0"
+  }
 }
