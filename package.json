@@ -1,6 +1,8 @@
 {
   "name": "img-minify-tool",
   "version": "1.0.0",
+  "author": "fanchong",
+  "license": "ISC",
   "description": "一行命令即可实现所有图片无损压缩， 大大提高工作效率",
   "main": "index.js",
   "repository": {
@@ -29,8 +31,6 @@
     "无损压缩",
     "image"
   ],
-  "author": "fanchong",
-  "license": "ISC",
   "engines": {
     "node": ">=7.0.0"
   }
