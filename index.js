@@ -51,7 +51,7 @@ console.log(`-> 本次无损压缩任务目录为：${bundlePath}\n`);
                 smooth: 80
               }),
               imageminPngquant({
-                quality: [0.5, 0.6],
+                quality: [0.6, 0.7],
                 speed: 1, //强力
                 strip: true,
               }),
