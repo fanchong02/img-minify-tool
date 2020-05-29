@@ -5,21 +5,6 @@
   "license": "ISC",
   "description": "一行命令即可实现所有图片无损压缩， 大大提高工作效率",
   "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/fanchong02/img-minify-tool.git"
-  },
-  "dependencies": {
-    "imagemin": "^7.0.1",
-    "imagemin-gifsicle": "^7.0.0",
-    "imagemin-mozjpeg": "^8.0.0",
-    "imagemin-pngquant": "^8.0.0",
-    "minimist": "^1.2.5"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "minify": "sh minify.sh"
-  },
   "keywords": [
     "img",
     "minify",
@@ -31,7 +16,22 @@
     "无损压缩",
     "image"
   ],
+  "scripts": {
+    "minify": "sh minify.sh"
+  },
+  "dependencies": {
+    "imagemin": "^7.0.1",
+    "imagemin-gifsicle": "^7.0.0",
+    "imagemin-mozjpeg": "^8.0.0",
+    "imagemin-pngquant": "^8.0.0",
+    "minimist": "^1.2.5"
+  },
+  "devDependencies": {},
   "engines": {
     "node": ">=7.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fanchong02/img-minify-tool.git"
   }
 }
