@@ -15,7 +15,9 @@
     "imagemin-pngquant": "^8.0.0",
     "minimist": "^1.2.5"
   },
-  "scripts": {},
+  "scripts": {
+    "minify": "sh minify.sh"
+  },
   "keywords": [
     "img",
     "minify",

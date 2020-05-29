@@ -1,5 +1,5 @@
 echo "-> 图片无损压缩任务启动";
-targetPath="$1";
+targetPath=$1;
 echo "-> 目标任务目录：${targetPath}\n";
 echo '-> 任务目录有效性检测\n';
 #优先检测任务目录的有效性
@@ -41,4 +41,4 @@ else
   echo '-> UPDATE: 更新完毕\n';
 fi;
 #node 执行无损压缩任务
-node index.js --bundlePath=${bundlePath};
+node index.js --bundlePath=${targetPath};
