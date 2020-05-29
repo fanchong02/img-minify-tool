@@ -39,7 +39,7 @@ console.log(`-> 本次无损压缩任务目录为：${bundlePath}\n`);
       } else {
         if (EXT_NAME.test(path.extname(childCatalogOrFilePath))) {
           //如果此文件为图片，对此文件进行压缩替换
-          const beforeSize = fs.statSync(childCatalogOrFilePath).size;
+          const beforeSize = statInfo.size;
           //统计压缩前size
           beforeSizeList = [...beforeSizeList, beforeSize];
           console.log(`${childCatalogOrFilePath} -> 正在无损压缩(压缩前体积：${byteToKb(beforeSize)})`);
@@ -47,12 +47,16 @@ console.log(`-> 本次无损压缩任务目录为：${bundlePath}\n`);
             destination: bundlePath,
             plugins: [
               imageminMozjpeg({
-                quality: 80, //质量过低， 会影响图片的视觉质量
+                quality: 60, //质量过低， 会影响图片的视觉质量
+                smooth: 80
               }),
               imageminPngquant({
-                quality: [0.6, 0.7]
+                quality: [0.5, 0.6],
+                speed: 1, //强力
+                strip: true,
               }),
               imageminGifsicle({
+                interlaced: true, //隔行扫描
                 quality: 80
               })
             ]
