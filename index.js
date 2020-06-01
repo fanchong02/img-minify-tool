@@ -7,18 +7,24 @@ const imageminGifsicle = require('imagemin-gifsicle');
 const params = require('minimist')(process.argv.slice(2));
 
 //获取执行任务的路径
-const { bundlePath } = params;
-console.log('------------------------ 开始执行图片无损压缩任务 ------------------------\n\n');
-console.log(`-> 本次无损压缩任务目录为：${bundlePath}\n`);
-//图片无损压缩函数
+const {
+  bundlePath
+} = params;
+console.log('------------------------ 开始执行图片压缩任务 ------------------------\n');
+console.log(`-> 本次压缩任务目录为：${bundlePath}\n`);
+//图片压缩函数
 (async () => {
   //存放压缩前的图片体积
   let beforeSizeList = [];
   //存放压缩后的图片体积
   let afterSizeList = [];
   //字节转kb方法
-  const byteToKb = (byte) => {
-    return `${(byte / 1024).toFixed(2)}kb`;
+  const byteToKb = (byte, unit = 'KB') => {
+    return `${(byte / 1024).toFixed(2)}${unit}`;
+  }
+  const savedSizeRate = (beforeSize, afterSize, unit = '%') => {
+    const savedRate = (beforeSize - afterSize) * 100 / beforeSize;
+    return `${savedRate.toFixed(1)}${unit}`;
   }
   //遍历某个文件夹下所有的XX文件
   async function findImageAndLetItSmall({
@@ -42,29 +48,28 @@ console.log(`-> 本次无损压缩任务目录为：${bundlePath}\n`);
           const beforeSize = statInfo.size;
           //统计压缩前size
           beforeSizeList = [...beforeSizeList, beforeSize];
-          console.log(`${childCatalogOrFilePath} -> 正在无损压缩(压缩前体积：${byteToKb(beforeSize)})`);
           await imagemin([childCatalogOrFilePath], {
             destination: bundlePath,
             plugins: [
               imageminMozjpeg({
-                quality: 60, //质量过低， 会影响图片的视觉质量
+                quality: 80, //质量过低， 会影响图片的视觉质量
                 smooth: 90
               }),
               imageminPngquant({
-                quality: [0.6, 0.7],
+                quality: [0.9, 0.95],
                 speed: 1, //强力
                 strip: true,
               }),
               imageminGifsicle({
                 interlaced: true, //隔行扫描
-                quality: 80
+                quality: 90
               })
             ]
           });
           const afterSize = fs.statSync(childCatalogOrFilePath).size;
 
           afterSizeList = [...afterSizeList, afterSize];
-          console.log(`${childCatalogOrFilePath} -> 压缩完成（压缩后体积：${byteToKb(afterSize)}）\n`);
+          console.log(`${childCatalogOrFilePath} -> 压缩完成（${byteToKb(beforeSize)} => ${byteToKb(afterSize)}[-${savedSizeRate(beforeSize, afterSize)}]）`);
         }
       }
     }
@@ -88,6 +93,6 @@ console.log(`-> 本次无损压缩任务目录为：${bundlePath}\n`);
   console.log(`-> 共压缩图片${beforeSizeList.length}张`);
   console.log(`-> 压缩前总体积${byteToKb(beforeSizeCount)}`);
   console.log(`-> 压缩后总体积${byteToKb(afterSizeCount)}`);
-  console.log(`-> 节约体积${(saveCount * 100 / beforeSizeCount).toFixed(2)}%（共${byteToKb(saveCount)}）\n\n`);
-  console.log('------------------------ 图片无损压缩任务执行完毕 ------------------------');
+  console.log(`-> 节约体积${(saveCount * 100 / beforeSizeCount).toFixed(2)}%（共${byteToKb(saveCount)}）\n`);
+  console.log('------------------------ 图片压缩任务执行完毕, 下次见~ ------------------------');
 })();
