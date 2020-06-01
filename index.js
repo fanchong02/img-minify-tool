@@ -23,7 +23,7 @@ console.log(`-> 本次压缩任务目录为：${bundlePath}\n`);
     return `${(byte / 1024).toFixed(2)}${unit}`;
   }
   const savedSizeRate = (beforeSize, afterSize, unit = '%') => {
-    const savedRate = (beforeSize - afterSize) * 100 / beforeSize;
+    const savedRate = -(beforeSize - afterSize) * 100 / beforeSize;
     return `${savedRate.toFixed(1)}${unit}`;
   }
   //遍历某个文件夹下所有的XX文件
@@ -69,7 +69,7 @@ console.log(`-> 本次压缩任务目录为：${bundlePath}\n`);
           const afterSize = fs.statSync(childCatalogOrFilePath).size;
 
           afterSizeList = [...afterSizeList, afterSize];
-          console.log(`${childCatalogOrFilePath} -> 压缩完成（${byteToKb(beforeSize)} => ${byteToKb(afterSize)}[-${savedSizeRate(beforeSize, afterSize)}]）`);
+          console.log(`${childCatalogOrFilePath} -> 压缩完成（${byteToKb(beforeSize)} => ${byteToKb(afterSize)}[${savedSizeRate(beforeSize, afterSize)}]）`);
         }
       }
     }
