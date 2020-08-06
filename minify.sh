@@ -31,13 +31,15 @@ if [ ! -d ~/fe_dev_tools/img_minify ]; then
   echo "-> DOWLOADING: 脚本下载完成";
   #安装工具包依赖
   echo "-> DOWLOADING: 脚本依赖安装";
-  cd ~/fe_dev_tools/img_minify && yarn install;
+  cd ~/fe_dev_tools/img_minify;
+  yarn install;
   echo "-> DOWLOADING: 脚本依赖安装完成";
 else
   echo '-> UPDATE: 本地已存在无损压缩工具';
   echo '-> UPDATE: 尝试脚本更新\n';
   cd ~/fe_dev_tools/img_minify;
-  git pull && yarn install;
+  git pull;
+  yarn install;
   echo '-> UPDATE: 更新完毕\n';
 fi;
 #node 执行无损压缩任务
